@@ -6,7 +6,7 @@ import { useFetchUsers } from '../hooks/useFetchUsers';
 import SkeletonLoader from '../components/Loader';
 
 const UserList: React.FC = () => {
-  const { users, loading, error } = useFetchUsers();
+  const { users, loading, error, deleteUser } = useFetchUsers();
 
   if (error) return <div>{error}</div>;
 
@@ -43,7 +43,10 @@ const UserList: React.FC = () => {
                   >
                     Edit
                   </Link>
-                  <button className="bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition">
+                  <button
+                    onClick={() => deleteUser(user.id)}
+                    className="bg-red-500 text-white py-1 px-3 rounded-lg hover:bg-red-600 transition"
+                  >
                     Delete
                   </button>
                 </div>

@@ -30,5 +30,16 @@ export const useFetchUsers = () => {
     fetchUsers();
   }, []);
 
-  return { users, loading, error };
+  const deleteUser = async (id: number) => {
+    try {
+      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    } catch (err) {
+      console.error('Failed to delete user:', err);
+      setError('Failed to delete user');
+    }
+  };
+
+  return { users, loading, error, deleteUser };
 };
